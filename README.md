@@ -84,6 +84,10 @@ http://localhost/basic/web/
 
 ### Install with Docker
 
+Create docker network
+
+    docker network create -d bridge --subnet 192.168.13.0/24 --gateway 192.168.13.1 yiinet
+
 Update your vendor packages
 
     docker-compose run --rm php composer update --prefer-dist
@@ -95,10 +99,15 @@ Run the installation triggers (creating cookie validation code)
 Start the container
 
     docker-compose up -d
+
+Add 192.168.13.2 with your custom domain to /etc/hosts
+
+    192.168.13.2    yii.local
     
 You can then access the application through the following URL:
 
     http://127.0.0.1:8000
+    http://yii.local
 
 **NOTES:** 
 - Minimum required Docker engine version `17.04` for development (see [Performance tuning for volume mounts](https://docs.docker.com/docker-for-mac/osxfs-caching/))
